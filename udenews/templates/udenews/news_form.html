@@ -1,0 +1,35 @@
+<!-- templates/home.html -->
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags  %}
+{% block title %}Create News{% endblock title %}
+
+{% block content %}
+<h2 class="text-center">Agregar Noticia</h2>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <form enctype="multipart/form-data" method="post">
+        {% csrf_token %} 
+        {{ form.as_p }} 
+        <button class="btn btn-primary" type="submit">Añadir</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+      
+
+    {% if 'ok' in request.GET %}
+    <div class="alert alert-success mt-5" role="alert">
+      <strong>La noticia se ha agregado correctamente</strong>
+    </div>
+    {% endif %}
+
+    {% if 'error' in request.GET %}
+    <div class="alert alert-danger mt-5" role="alert">
+      <strong>La noticia no se ha podido publicar. Intentalo de nuevo</strong>
+    </div>
+    {% endif %}
+
+{% endblock content %}
